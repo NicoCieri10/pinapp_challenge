@@ -8,20 +8,24 @@ environment:
   sdk: ">=3.4.1 <4.0.0"
 
 dependencies:
+  app_client:
+    path: packages/app_client
+  cupertino_icons: ^1.0.6
+  dio: ^5.7.0
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.6
+  flutter_bloc: ^8.1.6
+  flutter_dotenv: ^5.2.1
   go_router: ^14.6.1
-  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  core:
-    path: ./packages/core
 
   flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - .env

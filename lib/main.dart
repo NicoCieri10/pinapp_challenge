@@ -1,10 +1,16 @@
+import 'package:app_client/app_client.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pinapp_challenge/common/common.dart';
 import 'package:pinapp_challenge/home/home.dart';
 import 'package:pinapp_challenge/routes.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+  await dotenv.load();
 }
 
 class MyApp extends StatelessWidget {
@@ -12,28 +18,50 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final router = goRouter(context);
+    final router = getRouter(context);
 
-    return MaterialApp.router(
-      title: 'PinApp Challenge',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF00B9E8),
-          primary: const Color(0xFF00B9E8),
-          secondary: const Color(0xFFF50000),
+    return RepositoryProvider(
+      create: (context) => AppClientRepository(dioClient: getDioClient()),
+      child: MaterialApp.router(
+        title: 'PinApp Challenge',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF00B9E8),
+            primary: const Color(0xFF00B9E8),
+            secondary: const Color(0xFFF50000),
+          ),
+          useMaterial3: true,
         ),
-        useMaterial3: true,
+        debugShowCheckedModeBanner: false,
+        routerConfig: router,
       ),
-      debugShowCheckedModeBanner: false,
-      routerConfig: router,
     );
   }
 
-  GoRouter goRouter(BuildContext context) {
+  GoRouter getRouter(BuildContext context) {
     return GoRouter(
       initialLocation: HomePage.route,
       debugLogDiagnostics: true,
       routes: AppRoutes.routes,
     );
+  }
+
+  Dio getDioClient() {
+    final options = BaseOptions(
+      baseUrl: Env.baseUrl,
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 6),
+    );
+
+    final dio = Dio(options)
+      ..interceptors.add(
+        LogInterceptor(
+          requestHeader: false,
+          responseBody: true,
+          responseHeader: false,
+        ),
+      );
+
+    return dio;
   }
 }

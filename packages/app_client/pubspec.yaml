@@ -1,11 +1,12 @@
-name: core
-description: Core package for PinApp.
+name: app_client
+description: App Client package for PinApp.
 version: 1.0.0
 
 environment:
   sdk: ^3.4.1
 
 dependencies:
+  dio: ^5.7.0
 
 dev_dependencies:
   lints: ^3.0.0
