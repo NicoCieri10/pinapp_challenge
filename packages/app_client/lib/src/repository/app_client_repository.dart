@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:app_client/app_client.dart';
 import 'package:dio/dio.dart';
 
 /// The JSON serializable model for the API response.
@@ -15,8 +18,38 @@ class AppClientRepository {
   final Dio _dio;
 
   /// The post's path for the queries.
-  static const postsPath = '/posts';
+  static const _postsPath = '/posts';
 
   /// The comment's path for the queries.
-  static const commentsPath = '/comments';
+  static const _commentsPath = '/comments';
+
+  final _options = Options(validateStatus: (_) => true);
+
+  Future<List<Post>> getAllPosts() async {
+    try {
+      final response = await _dio.get<Map<String, dynamic>>(
+        _postsPath,
+        options: _options,
+      );
+
+      if (response.statusCode! >= 500) throw const ServerException();
+
+      if (response.statusCode != 200) throw const ClientException();
+
+      final data = (response.data as List)
+          .cast<Map<dynamic, dynamic>>()
+          .map((e) => e.cast<String, dynamic>())
+          .toList();
+
+      return data.map(Post.fromMap).toList();
+    } on ServerException catch (e) {
+      log(e.toString());
+      return [];
+    } on ClientException catch (e) {
+      log(e.toString());
+      return [];
+    } catch (e) {
+      throw PostException(e);
+    }
+  }
 }
