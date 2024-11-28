@@ -52,4 +52,33 @@ class AppClientRepository {
       throw PostException(e);
     }
   }
+
+  Future<List<Comment>> getAllCommentsById({required int postId}) async {
+    try {
+      final response = await _dio.get<Map<String, dynamic>>(
+        _commentsPath,
+        options: _options,
+        queryParameters: {'postId': postId},
+      );
+
+      if (response.statusCode! >= 500) throw const ServerException();
+
+      if (response.statusCode != 200) throw const ClientException();
+
+      final data = (response.data as List)
+          .cast<Map<dynamic, dynamic>>()
+          .map((e) => e.cast<String, dynamic>())
+          .toList();
+
+      return data.map(Comment.fromMap).toList();
+    } on ServerException catch (e) {
+      log(e.toString());
+      return [];
+    } on ClientException catch (e) {
+      log(e.toString());
+      return [];
+    } catch (e) {
+      throw CommentException(e);
+    }
+  }
 }

@@ -18,10 +18,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final router = getRouter(context);
-
     return RepositoryProvider(
-      create: (context) => AppClientRepository(dioClient: getDioClient()),
+      create: (_) => AppClientRepository(dioClient: getDioClient()),
       child: MaterialApp.router(
         title: 'PinApp Challenge',
         theme: ThemeData(
@@ -33,18 +31,16 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
-        routerConfig: router,
+        routerConfig: getRouter(context),
       ),
     );
   }
 
-  GoRouter getRouter(BuildContext context) {
-    return GoRouter(
-      initialLocation: HomePage.route,
-      debugLogDiagnostics: true,
-      routes: AppRoutes.routes,
-    );
-  }
+  GoRouter getRouter(BuildContext context) => GoRouter(
+        initialLocation: HomePage.route,
+        debugLogDiagnostics: true,
+        routes: AppRoutes.routes,
+      );
 
   Dio getDioClient() {
     final options = BaseOptions(
@@ -53,7 +49,7 @@ class MyApp extends StatelessWidget {
       receiveTimeout: const Duration(seconds: 6),
     );
 
-    final dio = Dio(options)
+    return Dio(options)
       ..interceptors.add(
         LogInterceptor(
           requestHeader: false,
@@ -61,7 +57,5 @@ class MyApp extends StatelessWidget {
           responseHeader: false,
         ),
       );
-
-    return dio;
   }
 }
