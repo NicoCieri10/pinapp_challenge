@@ -6,9 +6,10 @@ class CustomBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: context.pop,
-      child: const Icon(Icons.arrow_back_ios),
+    return IconButton(
+      onPressed: context.pop,
+      padding: const EdgeInsets.only(left: 10),
+      icon: const Icon(Icons.arrow_back_ios),
     );
   }
 }
