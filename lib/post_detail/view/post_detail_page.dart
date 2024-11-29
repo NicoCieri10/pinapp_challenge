@@ -1,15 +1,21 @@
+import 'package:app_client/app_client.dart';
 import 'package:flutter/material.dart';
 
 class PostDetailPage extends StatelessWidget {
-  const PostDetailPage({super.key});
+  const PostDetailPage({
+    required this.post,
+    super.key,
+  });
 
   static const route = '/post-detail';
 
+  final Post post;
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('PostDetailPage'),
+        child: Text(post.title ?? ''),
       ),
     );
   }

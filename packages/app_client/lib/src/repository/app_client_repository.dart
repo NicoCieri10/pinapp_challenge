@@ -27,7 +27,7 @@ class AppClientRepository {
 
   Future<List<Post>> getAllPosts() async {
     try {
-      final response = await _dio.get<Map<String, dynamic>>(
+      final response = await _dio.get<List<dynamic>>(
         _postsPath,
         options: _options,
       );
@@ -36,9 +36,9 @@ class AppClientRepository {
 
       if (response.statusCode != 200) throw const ClientException();
 
-      final data = (response.data as List)
-          .cast<Map<dynamic, dynamic>>()
-          .map((e) => e.cast<String, dynamic>())
+      final data = (response.data as List<dynamic>)
+          .cast<Map<dynamic, dynamic>?>()
+          .map((e) => e?.cast<String, dynamic>())
           .toList();
 
       return data.map(Post.fromMap).toList();
@@ -49,6 +49,7 @@ class AppClientRepository {
       log(e.toString());
       return [];
     } catch (e) {
+      log(e.toString());
       throw PostException(e);
     }
   }

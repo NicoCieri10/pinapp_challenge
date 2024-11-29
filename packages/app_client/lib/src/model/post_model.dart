@@ -11,11 +11,11 @@ class Post {
   final String? title;
   final String? body;
 
-  factory Post.fromMap(Map<String, dynamic> json) => Post(
-        userId: json['userId'],
-        id: json['id'],
-        title: json['title'],
-        body: json['body'],
+  factory Post.fromMap(Map<String, dynamic>? json) => Post(
+        userId: json?['userId'],
+        id: json?['id'],
+        title: json?['title'],
+        body: json?['body'],
       );
 
   Map<String, dynamic> toMap() => {
