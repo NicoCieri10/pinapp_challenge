@@ -20,6 +20,7 @@ class AppRoutes {
         final post = state.extra as Post?;
 
         if (post == null) throw Exception('PostDetailPage router - Post null ');
+
         return CustomTransitionPage(
           key: state.pageKey,
           child: PostDetailPage(

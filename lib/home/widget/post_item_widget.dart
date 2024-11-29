@@ -29,8 +29,9 @@ class PostItemWidget extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(),
-            Padding(
+            Container(
               padding: EdgeInsets.symmetric(horizontal: width * 0.07),
+              width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -39,6 +40,7 @@ class PostItemWidget extends StatelessWidget {
                     textAlign: TextAlign.start,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontSize: 16,
                       color: Colors.black,
                     ),
                   ),

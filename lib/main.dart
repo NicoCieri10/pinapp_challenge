@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:app_client/app_client.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -50,14 +48,6 @@ class MyApp extends StatelessWidget {
       receiveTimeout: const Duration(seconds: 6),
     );
 
-    return Dio(options)
-      ..interceptors.add(
-        LogInterceptor(
-          request: false,
-          requestHeader: false,
-          responseHeader: false,
-          logPrint: (e) => log(e.toString()),
-        ),
-      );
+    return Dio(options);
   }
 }

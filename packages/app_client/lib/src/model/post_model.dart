@@ -1,5 +1,5 @@
 class Post {
-  Post({
+  const Post({
     this.userId,
     this.id,
     this.title,

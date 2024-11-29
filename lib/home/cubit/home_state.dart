@@ -10,13 +10,13 @@ enum HomeStatus {
 class HomeState extends Equatable {
   const HomeState({
     this.status = HomeStatus.initial,
-    this.posts = const <Post>[],
     this.errorMessage = '',
+    this.posts = const <Post>[],
   });
 
   final HomeStatus status;
-  final List<Post> posts;
   final String errorMessage;
+  final List<Post> posts;
 
   bool get isLoading => status == HomeStatus.loading;
   bool get isSuccess => status == HomeStatus.success;
@@ -24,20 +24,19 @@ class HomeState extends Equatable {
 
   HomeState copyWith({
     HomeStatus? status,
-    List<Post>? posts,
     String? errorMessage,
-  }) {
-    return HomeState(
-      status: status ?? this.status,
-      posts: posts ?? this.posts,
-      errorMessage: errorMessage ?? this.errorMessage,
-    );
-  }
+    List<Post>? posts,
+  }) =>
+      HomeState(
+        status: status ?? this.status,
+        errorMessage: errorMessage ?? this.errorMessage,
+        posts: posts ?? this.posts,
+      );
 
   @override
   List<Object> get props => [
         status,
-        posts,
         errorMessage,
+        posts,
       ];
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinapp_challenge/home/cubit/home_cubit.dart';
 import 'package:pinapp_challenge/home/widget/widget.dart';
+import 'package:pinapp_challenge/widget/widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -49,7 +50,7 @@ class HomeView extends StatelessWidget {
 
           final posts = state.posts;
 
-          if (posts.isEmpty) return const EmptyWidget();
+          if (posts.isEmpty) return const EmptyPostWidget();
 
           return HomePostListView(posts: posts);
         },
@@ -71,21 +72,8 @@ class HomePostListView extends StatelessWidget {
     return Scrollbar(
       child: ListView.builder(
         itemCount: posts.length,
-        itemBuilder: (context, index) => PostItemWidget(
-          post: posts[index],
-        ),
+        itemBuilder: (_, i) => PostItemWidget(post: posts[i]),
       ),
-    );
-  }
-}
-
-class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('No hay posteos'),
     );
   }
 }
