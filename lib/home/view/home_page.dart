@@ -52,7 +52,10 @@ class HomeView extends StatelessWidget {
 
           if (posts.isEmpty) return const EmptyPostWidget();
 
-          return HomePostListView(posts: posts);
+          return RefreshIndicator(
+            onRefresh: context.read<HomeCubit>().init,
+            child: HomePostListView(posts: posts),
+          );
         },
       ),
     );

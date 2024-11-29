@@ -58,12 +58,15 @@ class PostDetailView extends StatelessWidget {
 
           if (comments.isEmpty) return const EmptyCommentsWidget();
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TitleWidget(title: post.title ?? ''),
-              CommentsListView(comments: comments),
-            ],
+          return RefreshIndicator(
+            onRefresh: () => context.read<PostCubit>().init(post: post),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TitleWidget(title: post.title ?? ''),
+                CommentsListView(comments: comments),
+              ],
+            ),
           );
         },
       ),
