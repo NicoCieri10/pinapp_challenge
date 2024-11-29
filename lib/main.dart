@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app_client/app_client.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +11,8 @@ import 'package:pinapp_challenge/home/home.dart';
 import 'package:pinapp_challenge/routes.dart';
 
 Future<void> main() async {
-  runApp(const MyApp());
   await dotenv.load();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -38,7 +40,6 @@ class MyApp extends StatelessWidget {
 
   GoRouter getRouter(BuildContext context) => GoRouter(
         initialLocation: HomePage.route,
-        debugLogDiagnostics: true,
         routes: AppRoutes.routes,
       );
 
@@ -52,9 +53,10 @@ class MyApp extends StatelessWidget {
     return Dio(options)
       ..interceptors.add(
         LogInterceptor(
+          request: false,
           requestHeader: false,
-          responseBody: true,
           responseHeader: false,
+          logPrint: (e) => log(e.toString()),
         ),
       );
   }
