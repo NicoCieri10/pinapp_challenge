@@ -5,27 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "pinapp_challenge",
+            "name": "PinApp DEV",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "pinapp_challenge (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "pinapp_challenge (release mode)",
+            "name": "PinApp PROD",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
         },
-        {
-            "name": "app_client",
-            "cwd": "packages\\app_client",
-            "request": "launch",
-            "type": "dart"
-        }
     ]
 }
