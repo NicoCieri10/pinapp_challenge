@@ -1,5 +1,5 @@
 class Comment {
-  Comment({
+  const Comment({
     this.postId,
     this.id,
     this.name,
@@ -13,12 +13,12 @@ class Comment {
   final String? email;
   final String? body;
 
-  factory Comment.fromMap(Map<String, dynamic> json) => Comment(
-        postId: json['postId'],
-        id: json['id'],
-        name: json['name'],
-        email: json['email'],
-        body: json['body'],
+  factory Comment.fromMap(Map<String, dynamic>? json) => Comment(
+        postId: json?['postId'],
+        id: json?['id'],
+        name: json?['name'],
+        email: json?['email'],
+        body: json?['body'],
       );
 
   Map<String, dynamic> toMap() => {
