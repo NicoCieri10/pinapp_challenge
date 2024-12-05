@@ -47,9 +47,7 @@ class PostItemWidget extends StatelessWidget {
                   const Gap(20),
                   Text(
                     post.body ?? 'body',
-                    style: const TextStyle(
-                      color: Colors.black54,
-                    ),
+                    style: const TextStyle(color: Colors.black54),
                   ),
                 ],
               ),

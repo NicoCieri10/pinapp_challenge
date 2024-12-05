@@ -54,7 +54,7 @@ class HomeView extends StatelessWidget {
 
           return RefreshIndicator(
             onRefresh: context.read<HomeCubit>().init,
-            child: HomePostListView(posts: posts),
+            child: _PostsListView(posts),
           );
         },
       ),
@@ -62,11 +62,8 @@ class HomeView extends StatelessWidget {
   }
 }
 
-class HomePostListView extends StatelessWidget {
-  const HomePostListView({
-    super.key,
-    required this.posts,
-  });
+class _PostsListView extends StatelessWidget {
+  const _PostsListView(this.posts);
 
   final List<Post> posts;
 
