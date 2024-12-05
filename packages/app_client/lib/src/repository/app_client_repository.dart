@@ -50,7 +50,7 @@ class AppClientRepository {
       return [];
     } catch (e) {
       log(e.toString());
-      throw PostException(e);
+      throw PostModelException(e);
     }
   }
 
@@ -79,7 +79,7 @@ class AppClientRepository {
       log(e.toString());
       return [];
     } catch (e) {
-      throw CommentException(e);
+      throw CommentModelException(e);
     }
   }
 }

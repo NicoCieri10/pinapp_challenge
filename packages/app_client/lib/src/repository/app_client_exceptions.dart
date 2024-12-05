@@ -24,8 +24,8 @@ class ClientException implements Exception {
   }
 }
 
-class PostException implements Exception {
-  const PostException([this.message]);
+class PostModelException implements Exception {
+  const PostModelException([this.message]);
 
   final dynamic message;
 
@@ -37,8 +37,8 @@ class PostException implements Exception {
   }
 }
 
-class CommentException implements Exception {
-  const CommentException([this.message]);
+class CommentModelException implements Exception {
+  const CommentModelException([this.message]);
 
   final dynamic message;
 
