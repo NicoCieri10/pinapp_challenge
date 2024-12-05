@@ -36,9 +36,7 @@ class CommentItemWidget extends StatelessWidget {
             ),
           ),
           const Gap(5),
-          Text(
-            comment.body ?? '',
-          ),
+          Text(comment.body ?? ''),
         ],
       ),
     );

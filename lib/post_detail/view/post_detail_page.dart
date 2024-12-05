@@ -64,7 +64,7 @@ class PostDetailView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TitleWidget(title: post.title ?? ''),
-                CommentsListView(comments: comments),
+                _CommentsListView(comments),
               ],
             ),
           );
@@ -74,11 +74,8 @@ class PostDetailView extends StatelessWidget {
   }
 }
 
-class CommentsListView extends StatelessWidget {
-  const CommentsListView({
-    required this.comments,
-    super.key,
-  });
+class _CommentsListView extends StatelessWidget {
+  const _CommentsListView(this.comments);
 
   final List<Comment> comments;
 
